@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jchs.pos.inventoryscanner.component.AppPropertyValueFactory?>
+<?import com.jchs.pos.inventoryscanner.component.ButtonCellFactory?>
+<?import com.jchs.pos.inventoryscanner.component.EntryValueFactory?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" 
+		fx:controller="com.jchs.pos.inventoryscanner.controller.ScanController">
+	<top>
+		<ToolBar>
+			<Button text="View Products" onAction="#viewProducts" />
+			<Button text="Generate Excel" onAction="#generateExcel" />
+		</ToolBar>
+	</top>
+	<center>
+		<VBox alignment="center" spacing="10">
+			<padding><Insets top="10" bottom="10" /></padding>
+			
+			<GridPane vgap="10" hgap="20" >
+				<padding><Insets left="50" /></padding>
+				<Label text="Barcode:" prefWidth="80"
+					GridPane.columnIndex="0" GridPane.rowIndex="1" />
+				<TextField fx:id="barcodeField" prefWidth="150"
+					GridPane.columnIndex="1" GridPane.rowIndex="1" />
+				<Text text="(Auto-search when barcode reaches 12 characters)"
+					GridPane.columnIndex="2" GridPane.rowIndex="1" />
+			</GridPane>
+		
+			<GridPane hgap="20" >
+				<padding><Insets left="50" /></padding>
+				<Label text="Description:" prefWidth="80"
+					GridPane.columnIndex="0" GridPane.rowIndex="1" />
+				<TextField fx:id="descriptionField" prefWidth="450" editable="false"
+					GridPane.columnIndex="1" GridPane.rowIndex="1" />
+			</GridPane>
+		
+			<GridPane hgap="20" >
+				<padding><Insets left="50" /></padding>
+				<Label text="Quantity:" prefWidth="80"
+					GridPane.columnIndex="0" GridPane.rowIndex="1" />
+				<TextField fx:id="quantityField" prefWidth="50"
+					GridPane.columnIndex="1" GridPane.rowIndex="1" />
+			</GridPane>
+		
+			<GridPane hgap="10" >
+				<padding><Insets left="160" /></padding>
+				<Button text="Add" prefWidth="80" onAction="#add"
+					GridPane.columnIndex="0" GridPane.rowIndex="1" />
+				<Button text="Clear" prefWidth="80" onAction="#clear"
+					GridPane.columnIndex="1" GridPane.rowIndex="1" />
+				<Button text="Clear Entries" prefWidth="120" onAction="#clearEntries"
+					GridPane.columnIndex="2" GridPane.rowIndex="1" />
+			</GridPane>
+		
+			<TableView fx:id="entriesTable" VBox.vgrow="always">
+				<columns>
+					<TableColumn text="Barcode" prefWidth="${entriesTable.width*0.2}">
+						<cellValueFactory>
+							<AppPropertyValueFactory property="product.barcode" />
+						</cellValueFactory>
+					</TableColumn>
+					<TableColumn text="Description" prefWidth="${entriesTable.width*0.50}">
+						<cellValueFactory>
+							<AppPropertyValueFactory property="product.description" />
+						</cellValueFactory>
+					</TableColumn>
+					<TableColumn text="Unit" prefWidth="${entriesTable.width*0.1}">
+						<cellValueFactory>
+							<PropertyValueFactory property="unit" />
+						</cellValueFactory>
+					</TableColumn>
+					<TableColumn text="Qty" prefWidth="${entriesTable.width*0.1}">
+						<cellValueFactory>
+							<PropertyValueFactory property="quantity" />
+						</cellValueFactory>
+					</TableColumn>
+					<TableColumn style="-fx-alignment: center" prefWidth="${entriesTable.width*0.1}">
+						<cellValueFactory>
+							<EntryValueFactory />
+						</cellValueFactory>
+						<cellFactory>
+							<ButtonCellFactory />
+						</cellFactory>
+					</TableColumn>
+				</columns>
+			</TableView>
+			
+		</VBox>
+	</center>
+</BorderPane>

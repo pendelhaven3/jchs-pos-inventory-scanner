@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.ToolBar?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.jchs.pos.inventoryscanner.controller.ViewProductsController" 
+	alignment="center">
+	
+	<ToolBar>
+		<Button text="Scan" onAction="#scan" />
+		<Button text="Upload Products" onAction="#uploadProducts" />
+	</ToolBar>
+	
+	<TableView fx:id="productsTable" VBox.vgrow="always">
+		<columns>
+			<TableColumn text="Barcode" prefWidth="${productsTable.width*0.3}">
+				<cellValueFactory>
+					<PropertyValueFactory property="barcode" />
+				</cellValueFactory>
+			</TableColumn>
+			<TableColumn text="Description" prefWidth="${productsTable.width*0.7}">
+				<cellValueFactory>
+					<PropertyValueFactory property="description" />
+				</cellValueFactory>
+			</TableColumn>
+		</columns>
+	</TableView>
+	
+</VBox>

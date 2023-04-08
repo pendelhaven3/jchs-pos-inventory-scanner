@@ -24,7 +24,7 @@ public class InventoryScanner extends Application {
 		sceneManager.setStage(stage);
 		sceneManager.loadScene("viewProducts");
 		
-		stage.setTitle("JCHS POS Inventory Scanner v1.0.0-SNAPSHOT");
+		stage.setTitle("JCHS POS Inventory Scanner v1.0.1");
 		stage.show();
 	}
 	

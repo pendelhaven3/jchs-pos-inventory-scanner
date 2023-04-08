@@ -17,9 +17,14 @@
 	
 	<TableView fx:id="productsTable" VBox.vgrow="always">
 		<columns>
-			<TableColumn text="Barcode" prefWidth="${productsTable.width*0.3}">
+			<TableColumn text="Barcode" prefWidth="${productsTable.width*0.2}">
 				<cellValueFactory>
 					<PropertyValueFactory property="barcode" />
+				</cellValueFactory>
+			</TableColumn>
+			<TableColumn text="Description" prefWidth="${productsTable.width*0.1}">
+				<cellValueFactory>
+					<PropertyValueFactory property="unit" />
 				</cellValueFactory>
 			</TableColumn>
 			<TableColumn text="Description" prefWidth="${productsTable.width*0.7}">

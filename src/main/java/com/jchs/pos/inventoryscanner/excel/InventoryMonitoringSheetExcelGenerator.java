@@ -22,21 +22,13 @@ public class InventoryMonitoringSheetExcelGenerator {
         
         for (Entry entry : entries) {
             Row row = sheet.getRow(currentRow);
-            Cell cell = row.getCell(3);
+            Cell cell = row.getCell(1);
+            cell.setCellValue(entry.getProduct().getUnit());
+            cell = row.getCell(2);
             cell.setCellValue(entry.getProduct().getDescription());
             cell = row.getCell(12);
             cell.setCellValue(entry.getProduct().getBarcode());
-            
-            String unit = entry.getUnit();
-            if ("CASE".equals(unit)) {
-                cell = row.getCell(0);
-            } else if ("TIE".equals(unit) || "PCK".equals(unit) || "HDOZ".equals(unit)) {
-                cell = row.getCell(1);
-            } else {
-                cell = row.getCell(2);
-            }
-            cell.setCellValue(entry.getQuantity());
-            
+                        
             currentRow++;
         }
         

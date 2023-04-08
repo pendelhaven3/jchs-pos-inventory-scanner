@@ -28,22 +28,4 @@ public class InventoryScanner extends Application {
 		stage.show();
 	}
 	
-//	private void showMainScreen(Stage stage) throws Exception {
-		/*
-		StageController stageController = context.getBean(StageController.class);
-		stageController.setStage(stage);
-		stageController.showMainMenuScreen();
-		stage.setResizable(true);
-		stage.getIcons().add(new Image(HRApp.class.getClassLoader().getResourceAsStream("images/icon.png")));
-		
-        final SplashScreen splash = SplashScreen.getSplashScreen();
-        if (splash != null) {
-            splash.close();
-        }
-		*/
-		
-
-//		stage.getScene().getStylesheets().add("css/application.css");
-//	}
-
 }

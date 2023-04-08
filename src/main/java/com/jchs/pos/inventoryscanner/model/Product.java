@@ -13,5 +13,6 @@ public class Product {
 
 	private String barcode;
 	private String description;
+	private String unit;
 	
 }

@@ -20,6 +20,7 @@ import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -37,12 +38,7 @@ public class ScanController extends AbstractController {
 	
 	@FXML private TextField barcodeField;
 	@FXML private TextField descriptionField;
-	@FXML private RadioButton unitCase;
-	@FXML private RadioButton unitTie;
-	@FXML private RadioButton unitPck;
-	@FXML private RadioButton unitHdoz;
-	@FXML private RadioButton unitPcs;
-	@FXML private TextField quantityField;
+	@FXML private Button addButton;
 	@FXML private TableView<Entry> entriesTable;
 	
 	private boolean autosearch = true;
@@ -60,21 +56,13 @@ public class ScanController extends AbstractController {
 					Product product = productService.findByBarcode(value);
 					if (product != null) {
 						descriptionField.setText(product.getDescription());
-						unitCase.setSelected(true);
-						quantityField.clear();
-						unitCase.requestFocus();
+						addButton.requestFocus();
 					} else {
 						ShowDialog.error("Barcode not found");
 					}
 					autosearch = false;
 				} else {
 					descriptionField.clear();
-					unitCase.setSelected(false);
-					unitTie.setSelected(false);
-					unitPck.setSelected(false);
-					unitHdoz.setSelected(false);
-					unitPcs.setSelected(false);
-					quantityField.clear();
 					autosearch = true;
 				}
 			}
@@ -91,47 +79,28 @@ public class ScanController extends AbstractController {
 	
 	@FXML
 	public void add() {
-	    if (StringUtils.isEmpty(quantityField.getText())) {
-	        ShowDialog.error("Quantity is required");
-	        quantityField.requestFocus();
-	        return;
-	    }
-	    
 	    if (entriesTable.getItems().size() == MAX_ENTRIES) {
 	        ShowDialog.error("Max entries reached");
 	        return;
 	    }
 	    
+	    Product product = productService.findByBarcode(barcodeField.getText());
+	    
 		Entry entry = new Entry();
 		entry.setProduct(productService.findByBarcode(barcodeField.getText()));
-		entry.setUnit(getUnit());
-		entry.setQuantity(Integer.valueOf(quantityField.getText()));
+		entry.setUnit(product.getUnit());
 		
 		entriesTable.getItems().add(entry);
 		
 		clear();
+		autosearch = true;
+		entriesTable.scrollTo(entriesTable.getItems().size()-1);		
 	}
 	
-	private String getUnit() {
-		if (unitCase.isSelected()) return "CASE";
-		if (unitTie.isSelected()) return "TIE";
-		if (unitPck.isSelected()) return "PCK";
-		if (unitHdoz.isSelected()) return "HDOZ";
-		if (unitPcs.isSelected()) return "PCS";
-		
-		throw new RuntimeException("At least one unit should have been selected");
-	}
-
 	@FXML
 	public void clear() {
 		barcodeField.clear();
 		descriptionField.clear();
-		unitCase.setSelected(false);
-		unitTie.setSelected(false);
-		unitPck.setSelected(false);
-		unitHdoz.setSelected(false);
-		unitPcs.setSelected(false);
-		quantityField.clear();
 		barcodeField.requestFocus();
 	}
 	

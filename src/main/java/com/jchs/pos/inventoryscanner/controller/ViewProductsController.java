@@ -56,10 +56,17 @@ public class ViewProductsController extends AbstractController {
         try (FileInputStream fis = new FileInputStream(file);) {
             for (String line : IOUtils.readLines(fis, Charset.defaultCharset())) {
                 String[] parts = line.split("\\|");
+                
+                if (parts.length < 3) {
+                	ShowDialog.error("Missing UNIT column.\nPlease upload products file generated from jchs-pos version 2.6.8 or greater");
+                	return;
+                }
+                
                 String barcode = parts[0];
                 String description = parts[1];
+                String unit = parts[2];
 
-                products.add(new Product(barcode, description));
+                products.add(new Product(barcode, description, unit));
             }
         } catch (Exception e) {
             ShowDialog.unexpectedError();

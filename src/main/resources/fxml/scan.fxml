@@ -52,17 +52,9 @@
 					GridPane.columnIndex="1" GridPane.rowIndex="1" />
 			</GridPane>
 		
-			<GridPane hgap="20" >
-				<padding><Insets left="50" /></padding>
-				<Label text="Quantity:" prefWidth="80"
-					GridPane.columnIndex="0" GridPane.rowIndex="1" />
-				<TextField fx:id="quantityField" prefWidth="50"
-					GridPane.columnIndex="1" GridPane.rowIndex="1" />
-			</GridPane>
-		
 			<GridPane hgap="10" >
 				<padding><Insets left="160" /></padding>
-				<Button text="Add" prefWidth="80" onAction="#add"
+				<Button fx:id="addButton" text="Add" prefWidth="80" onAction="#add"
 					GridPane.columnIndex="0" GridPane.rowIndex="1" />
 				<Button text="Clear" prefWidth="80" onAction="#clear"
 					GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -77,7 +69,7 @@
 							<AppPropertyValueFactory property="product.barcode" />
 						</cellValueFactory>
 					</TableColumn>
-					<TableColumn text="Description" prefWidth="${entriesTable.width*0.50}">
+					<TableColumn text="Description" prefWidth="${entriesTable.width*0.5}">
 						<cellValueFactory>
 							<AppPropertyValueFactory property="product.description" />
 						</cellValueFactory>
@@ -87,12 +79,7 @@
 							<PropertyValueFactory property="unit" />
 						</cellValueFactory>
 					</TableColumn>
-					<TableColumn text="Qty" prefWidth="${entriesTable.width*0.1}">
-						<cellValueFactory>
-							<PropertyValueFactory property="quantity" />
-						</cellValueFactory>
-					</TableColumn>
-					<TableColumn style="-fx-alignment: center" prefWidth="${entriesTable.width*0.1}">
+					<TableColumn style="-fx-alignment: center" prefWidth="${entriesTable.width*0.195}">
 						<cellValueFactory>
 							<EntryValueFactory />
 						</cellValueFactory>
